@@ -1,40 +1,37 @@
-# Objetos Texturizados com OpenGL
+# Textured Objects with OpenGL
 
-Este é um projeto desenvolvido para a faculdade, com o objetivo de explorar conceitos de renderização 2D utilizando a biblioteca **OpenGL**. O programa renderiza objetos com texturas aplicadas, utilizando VAOs, VBOs e shaders personalizados.
+This is a project developed for university purposes, aiming to explore 2D rendering concepts using the OpenGL library. The program renders objects with applied textures, utilizing VAOs, VBOs, and custom shaders.
 
-## 📚 Descrição
+## 📚 Description
 
-O projeto demonstra o uso de sprites texturizados em uma cena 2D. Para isso, utilizamos a biblioteca **GLFW** para a criação da janela e controle de contexto OpenGL, e a biblioteca **GLAD** para o carregamento das funções OpenGL.
+The project demonstrates the use of textured sprites in a 2D scene. For this, we use the GLFW library to create the window and manage the OpenGL context, and the GLAD library to load OpenGL functions.
 
-A renderização inclui:
-- Carregamento e uso de shaders (vertex e fragment)
-- Aplicação de texturas em sprites
-- Gerenciamento de buffers (VAO/VBO)
+The rendering process includes:
+- Loading and using shaders (vertex and fragment)
+- Applying textures to sprites
+- Managing buffers (VAO/VBO)
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## 🛠️ Technologies Used
 
 - **C++**
 - **OpenGL 4.6 (via GLAD)**
-- **GLFW** – para criação de janelas e input
-- **stb_image** – para carregamento de texturas
-- **GLAD** – carregador de funções OpenGL
-- **X11/Xrandr/Xi** – bibliotecas do sistema para interface gráfica (Linux)
+- **GLFW**
+- **stb_image**
+- **GLAD**
 
 ---
 
-## 🚀 Como compilar
-
-Certifique-se de estar com as dependências instaladas (GLFW, OpenGL, etc). Em seguida, utilize o comando abaixo no terminal:
+## 🚀 How to Compile 
+Make sure all dependencies are installed (GLFW, OpenGL, etc.). Then, run the following command in the terminal:
 
 bash
 g++ -Iinclude main.cpp sprite.cpp shader.cpp src/gl.c -o objetos-texturizados -I/usr/include -lglfw -ldl -lGL -lX11 -lpthread -lXrandr -lXi
 
 
 
-## 🚀 Como rodar
-
-Após a compilação bem-sucedida, execute o programa com o comando:
+## 🚀 How to Run
+After a successful compilation, run the program with the command:
 
 ./objetos-texturizados
