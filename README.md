@@ -26,7 +26,6 @@ The rendering process includes:
 ## 🚀 How to Compile 
 Make sure all dependencies are installed (GLFW, OpenGL, etc.). Then, run the following command in the terminal:
 
-bash
 g++ -Iinclude main.cpp sprite.cpp shader.cpp src/gl.c -o objetos-texturizados -I/usr/include -lglfw -ldl -lGL -lX11 -lpthread -lXrandr -lXi
 
 

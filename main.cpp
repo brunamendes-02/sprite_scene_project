@@ -32,7 +32,7 @@ int main() {
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    Shader shader("shaders/vertex.glsl", "shaders/fragment.glsl");
+    Shader shader("shaders/vertex_shader.glsl", "shaders/fragment_shader.glsl");
     glm::mat4 projection = glm::ortho(0.0f, float(SCREEN_WIDTH), 0.0f, float(SCREEN_HEIGHT));
     shader.use();
     shader.setMat4("projection", projection);
