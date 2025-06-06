@@ -1,4 +1,5 @@
-
+#include <chrono>
+#include "CharacterController.h"
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
@@ -38,23 +39,32 @@ int main() {
     shader.setMat4("projection", projection);
 
     Sprite background("textures/background.png", shader);
-    Sprite character("textures/character.png", shader);
+    CharacterController character("textures/character.png", shader, 4, 4, 16, 0.1f);
     Sprite dragon("textures/dragon.png", shader);
     Sprite tree("textures/tree.png", shader);
 
+
+    auto lastTime = std::chrono::high_resolution_clock::now();
+
     while (!glfwWindowShouldClose(window)) {
+        auto currentTime = std::chrono::high_resolution_clock::now();
+        float deltaTime = std::chrono::duration<float>(currentTime - lastTime).count();
+        lastTime = currentTime;
+
         glClearColor(0.1f, 0.1f, 0.15f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         background.Draw(0, 0, 800, 600);
         tree.Draw(100, 100, 150, 200);
         dragon.Draw(300, 100, 200, 200);
-        character.Draw(500, 100, 100, 150);
-
+        
+        character.Update(deltaTime, window);
+        character.Draw(character.x, character.y, 100, 150);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
+
 
     glfwTerminate();
     return 0;
