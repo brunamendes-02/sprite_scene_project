@@ -6,11 +6,17 @@
 
 class CharacterController : public Sprite {
 public:
+    float x, y;
+    float speed;
+
+    // 🔹 Construtor completo para animação (mantém se quiser usar animações no futuro)
     CharacterController(const std::string& texturePath, Shader& shader,
                         int sheetCols, int sheetRows, int totalFrames, float frameTime);
 
+    // 🔸 Novo construtor para imagem estática (sem animação)
+    CharacterController(const std::string& texturePath, Shader& shader);
+
     void Update(float deltaTime, GLFWwindow* window);
-    float x, y, speed;
 };
 
 #endif

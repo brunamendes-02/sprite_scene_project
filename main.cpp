@@ -39,7 +39,7 @@ int main() {
     shader.setMat4("projection", projection);
 
     Sprite background("textures/background.png", shader);
-    CharacterController character("textures/character.png", shader, 4, 4, 16, 0.1f);
+    CharacterController character("textures/character.png", shader);
     Sprite dragon("textures/dragon.png", shader);
 
 
@@ -57,6 +57,7 @@ int main() {
         dragon.Draw(300, 50, 200, 150);
         character.Update(deltaTime, window);
         character.Draw(character.x, character.y, 60, 90); 
+
 
         glfwSwapBuffers(window);
         glfwPollEvents();
