@@ -41,7 +41,6 @@ int main() {
     Sprite background("textures/background.png", shader);
     CharacterController character("textures/character.png", shader, 4, 4, 16, 0.1f);
     Sprite dragon("textures/dragon.png", shader);
-    Sprite tree("textures/tree.png", shader);
 
 
     auto lastTime = std::chrono::high_resolution_clock::now();
@@ -55,11 +54,9 @@ int main() {
         glClear(GL_COLOR_BUFFER_BIT);
 
         background.Draw(0, 0, 800, 600);
-        tree.Draw(100, 100, 150, 200);
-        dragon.Draw(300, 100, 200, 200);
-        
+        dragon.Draw(300, 50, 200, 150);
         character.Update(deltaTime, window);
-        character.Draw(character.x, character.y, 100, 150);
+        character.Draw(character.x, character.y, 60, 90); 
 
         glfwSwapBuffers(window);
         glfwPollEvents();

@@ -1,5 +1,6 @@
-#include "sprite.h"
+#define STB_IMAGE_IMPLEMENTATION
 #include <stb/stb_image.h>
+#include "sprite.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include <iostream>
 
@@ -53,4 +54,56 @@ void Sprite::Draw(float x, float y, float width, float height) {
     glBindTexture(GL_TEXTURE_2D, texture);
     glBindVertexArray(VAO);
     glDrawArrays(GL_TRIANGLES, 0, 6);
+}
+
+void Sprite::initRenderData() {
+    float vertices[] = {
+        // pos      // tex
+        0.0f, 1.0f, 0.0f, 1.0f,
+        1.0f, 0.0f, 1.0f, 0.0f,
+        0.0f, 0.0f, 0.0f, 0.0f,
+
+        0.0f, 1.0f, 0.0f, 1.0f,
+        1.0f, 1.0f, 1.0f, 1.0f,
+        1.0f, 0.0f, 1.0f, 0.0f
+    };
+
+    glGenVertexArrays(1, &VAO);
+    glGenBuffers(1, &VBO);
+
+    glBindVertexArray(VAO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
+
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
+
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
+}
+
+void Sprite::loadTexture(const std::string& path) {
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);  
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);  
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);     
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);     
+
+    int width, height, nrChannels;
+    stbi_set_flip_vertically_on_load(true); // Inverte a textura no eixo Y
+    unsigned char *data = stbi_load(path.c_str(), &width, &height, &nrChannels, 4);
+
+    if (data) {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+        glGenerateMipmap(GL_TEXTURE_2D);
+    } else {
+        std::cerr << "Erro ao carregar textura: " << path << std::endl;
+    }
+
+    stbi_image_free(data);
 }
